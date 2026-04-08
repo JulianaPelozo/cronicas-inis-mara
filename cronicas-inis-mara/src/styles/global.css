@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: radial-gradient(circle, #0f0f0f, #050505);
+  color: #eaeaea;
+}
+
+/* Container */
+.clas-container {
+  padding: 40px;
+}
+
+/* Title */
+.title {
+  font-size: 32px;
+  color: #c9a96e;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.form {
+  margin-bottom: 30px;
+}
+
+.form input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 250px;
+  background: #111;
+  border: 1px solid #333;
+  color: #eee;
+}
+
+.form button {
+  padding: 10px 15px;
+  background: #c9a96e;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.form button:hover {
+  background: #e0c48a;
+}
+
+/* Grid */
+.grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Card */
+.card {
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+  border: 1px solid #2c2c2c;
+  border-radius: 12px;
+  padding: 20px;
+  width: 240px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* Header */
+.card-header h2 {
+  margin: 0;
+  color: #c9a96e;
+}
+
+.elemento {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: #333;
+  margin: 10px 0;
+}
+
+/* Lema */
+.lema {
+  font-style: italic;
+  color: #bbb;
+}
+
+.personagens-container {
+  padding: 40px;
+}

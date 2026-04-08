@@ -1,69 +1,52 @@
-import "./App.css";
-import { getDB } from "./database";
-
+import { useEffect, useState } from "react";
+import { initDB } from "./services/database";
+import Clas from "./pages/Clas";
+import "./styles/global.css";
+import Personagens from "./pages/Personagens";
 
 export default function App() {
+  const [pagina, setPagina] = useState("clas");
+
+  useEffect(() => {
+    initDB();
+  }, []);
+
+  function renderPagina() {
+    switch (pagina) {
+      case "clas":
+        return <Clas />;
+      case "personagens":
+        return <Personagens />;
+      default:
+        return <h1>Página não encontrada</h1>;
+    }
+  }
+
   return (
-    <div className="container">
-      <aside className="sidebar">
-        <h2>🜃 Inis Mara</h2>
-        <nav>
-          <button>Personagens</button>
-          <button>Clãs</button>
-          <button>Magia</button>
-          <button>Eventos</button>
-          <button>Mundo</button>
-        </nav>
+    <div style={{ display: "flex" }}>
+      {/* Sidebar */}
+      <aside
+        style={{
+          width: "200px",
+          background: "#111",
+          padding: "20px",
+          borderRight: "1px solid #333",
+        }}
+      >
+        <h2 style={{ color: "#c9a96e" }}>🜃 Inis Mara</h2>
+
+        <button onClick={() => setPagina("clas")}>
+           Clãs
+        </button>
+        <button onClick={() => setPagina("personagens")}>
+          Personagens
+        </button>
       </aside>
 
-      <main className="main">
-        <h1>Crônicas de Inis Mara</h1>
-        <p className="subtitle">
-          “Vida longa aos bruxos”
-        </p>
-
-        <div className="cards">
-          <div className="card">
-            <h3>Personagens</h3>
-            <p>Crie e gerencie seus personagens.</p>
-          </div>
-
-          <div className="card">
-            <h3>Clãs</h3>
-            <p>Organize famílias e alianças.</p>
-          </div>
-
-          <div className="card">
-            <h3>Magia</h3>
-            <p>Defina poderes e limitações.</p>
-          </div>
-        </div>
+      {/* Conteúdo */}
+      <main style={{ flex: 1 }}>
+        {renderPagina()}
       </main>
     </div>
   );
-}
-
-
-async function criarPersonagemTeste() {
-  const db = getDB();
-
-  await db.execute(
-    "INSERT INTO personagens (nome, cla, magia, status) VALUES (?, ?, ?, ?)",
-    ["Elora", "Lunombra", "Sombras", "Vivo"]
-  );
-
-  alert("Personagem criado!");
-  <button onClick={criarPersonagemTeste}>
-    Criar personagem teste
-  </button>
-
-  async function listarPersonagens() {
-    const db = getDB();
-
-    const personagens = await db.select(
-      "SELECT * FROM personagens"
-    );
-
-    console.log(personagens);
-  }
 }
