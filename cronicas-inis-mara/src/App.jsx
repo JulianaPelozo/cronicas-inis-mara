@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { initDB } from "./services/database";
 import Clas from "./pages/Clas";
-import "./styles/global.css";
 import Personagens from "./pages/Personagens";
+import Sidebar from "./components/Sidebar";
+import "./styles/global.css";
 
 export default function App() {
   const [pagina, setPagina] = useState("clas");
@@ -23,30 +24,12 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: "flex" }}>
-      {/* Sidebar */}
-      <aside
-        style={{
-          width: "200px",
-          background: "#111",
-          padding: "20px",
-          borderRight: "1px solid #333",
-        }}
-      >
-        <h2 style={{ color: "#c9a96e" }}>🜃 Inis Mara</h2>
-
-        <button onClick={() => setPagina("clas")}>
-           Clãs
-        </button>
-        <button onClick={() => setPagina("personagens")}>
-          Personagens
-        </button>
-      </aside>
-
-      {/* Conteúdo */}
-      <main style={{ flex: 1 }}>
+    <div className="app-layout">
+      <Sidebar currentPage={pagina} onNavigate={setPagina} />
+      <main className="main-content">
         {renderPagina()}
       </main>
     </div>
   );
+  
 }
