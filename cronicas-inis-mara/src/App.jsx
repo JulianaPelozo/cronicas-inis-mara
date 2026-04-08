@@ -1,4 +1,6 @@
 import "./App.css";
+import { getDB } from "./database";
+
 
 export default function App() {
   return (
@@ -39,4 +41,29 @@ export default function App() {
       </main>
     </div>
   );
+}
+
+
+async function criarPersonagemTeste() {
+  const db = getDB();
+
+  await db.execute(
+    "INSERT INTO personagens (nome, cla, magia, status) VALUES (?, ?, ?, ?)",
+    ["Elora", "Lunombra", "Sombras", "Vivo"]
+  );
+
+  alert("Personagem criado!");
+  <button onClick={criarPersonagemTeste}>
+    Criar personagem teste
+  </button>
+
+  async function listarPersonagens() {
+    const db = getDB();
+
+    const personagens = await db.select(
+      "SELECT * FROM personagens"
+    );
+
+    console.log(personagens);
+  }
 }
