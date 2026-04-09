@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { FaUser, FaUsers, FaMagic, FaTag, FaPlus } from "react-icons/fa";
 import { criarPersonagem, listarPersonagens } from "../services/personagensService";
 import { PersonagemCard } from "../components/Card";
+import { 
+  PageTitle, FormCard, FormGroup, InputWrapper, InputIcon, 
+  InputField, Button, CardGrid, EmptyState 
+} from "../components/styles";
 
 export default function Personagens() {
   const [nome, setNome] = useState("");
@@ -31,45 +35,43 @@ export default function Personagens() {
   }, []);
 
   return (
-    <div className="personagens-container">
-      <h1>⚔️ Personagens</h1>
+    <div>
+      <PageTitle>⚔️ Personagens</PageTitle>
 
-      <div className="form-card">
+      <FormCard>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <div className="input-wrapper">
-              <FaUser className="input-icon" />
-              <input className="input-field" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} />
-            </div>
-            <div className="input-wrapper">
-              <FaUsers className="input-icon" />
-              <input className="input-field" placeholder="Clã" value={cla} onChange={(e) => setCla(e.target.value)} />
-            </div>
-            <div className="input-wrapper">
-              <FaMagic className="input-icon" />
-              <input className="input-field" placeholder="Magia" value={magia} onChange={(e) => setMagia(e.target.value)} />
-            </div>
-            <div className="input-wrapper">
-              <FaTag className="input-icon" />
-              <input className="input-field" placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} />
-            </div>
-            <button type="submit" className="btn">
+          <FormGroup>
+            <InputWrapper>
+              <InputIcon><FaUser /></InputIcon>
+              <InputField placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} />
+            </InputWrapper>
+            <InputWrapper>
+              <InputIcon><FaUsers /></InputIcon>
+              <InputField placeholder="Clã" value={cla} onChange={(e) => setCla(e.target.value)} />
+            </InputWrapper>
+            <InputWrapper>
+              <InputIcon><FaMagic /></InputIcon>
+              <InputField placeholder="Magia" value={magia} onChange={(e) => setMagia(e.target.value)} />
+            </InputWrapper>
+            <InputWrapper>
+              <InputIcon><FaTag /></InputIcon>
+              <InputField placeholder="Status" value={status} onChange={(e) => setStatus(e.target.value)} />
+            </InputWrapper>
+            <Button type="submit">
               <FaPlus /> Criar Personagem
-            </button>
-          </div>
+            </Button>
+          </FormGroup>
         </form>
-      </div>
+      </FormCard>
 
       {personagens.length === 0 ? (
-        <div className="empty-state">
-          Nenhum personagem foi criado ainda.
-        </div>
+        <EmptyState>Nenhum personagem foi criado ainda.</EmptyState>
       ) : (
-        <div className="card-grid">
+        <CardGrid>
           {personagens.map((p) => (
             <PersonagemCard key={p.id} {...p} />
           ))}
-        </div>
+        </CardGrid>
       )}
     </div>
   );

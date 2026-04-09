@@ -3,7 +3,7 @@ import { initDB } from "./services/database";
 import Clas from "./pages/Clas";
 import Personagens from "./pages/Personagens";
 import Sidebar from "./components/Sidebar";
-import "./styles/global.css";
+import { AppLayout, MainContent } from "./components/styles";
 
 export default function App() {
   const [pagina, setPagina] = useState("clas");
@@ -24,12 +24,11 @@ export default function App() {
   }
 
   return (
-    <div className="app-layout">
+    <AppLayout>
       <Sidebar currentPage={pagina} onNavigate={setPagina} />
-      <main className="main-content">
+      <MainContent>
         {renderPagina()}
-      </main>
-    </div>
+      </MainContent>
+    </AppLayout>
   );
-  
 }

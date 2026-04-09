@@ -1,28 +1,27 @@
 import { FaDragon, FaUsers, FaMountain } from 'react-icons/fa';
+import { SidebarContainer, SidebarTitle, NavButton } from './styles';
 
 export default function Sidebar({ currentPage, onNavigate }) {
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <h2 className="sidebar-title">
-          <FaMountain /> Inis Mara
-        </h2>
-      </div>
+    <SidebarContainer>
+      <SidebarTitle>
+        <FaMountain /> Inis Mara
+      </SidebarTitle>
       
-      <nav className="sidebar-nav">
-        <button 
-          className={`nav-button ${currentPage === 'clas' ? 'active' : ''}`}
+      <nav>
+        <NavButton 
+          $active={currentPage === 'clas'}
           onClick={() => onNavigate('clas')}
         >
           <FaDragon /> Clãs
-        </button>
-        <button 
-          className={`nav-button ${currentPage === 'personagens' ? 'active' : ''}`}
+        </NavButton>
+        <NavButton 
+          $active={currentPage === 'personagens'}
           onClick={() => onNavigate('personagens')}
         >
           <FaUsers /> Personagens
-        </button>
+        </NavButton>
       </nav>
-    </aside>
+    </SidebarContainer>
   );
 }

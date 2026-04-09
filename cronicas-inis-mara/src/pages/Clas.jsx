@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import { FaPlus, FaSearch } from "react-icons/fa";
+import { FaPlus, FaSearch, FaDragon, FaMountain } from "react-icons/fa";
 import { criarCla, listarClas } from "../services/clasService";
 import { ClaCard } from "../components/Card";
+import { 
+  PageTitle, FormCard, FormGroup, InputWrapper, InputIcon, 
+  InputField, Button, CardGrid, EmptyState 
+} from "../components/styles";
 
 export default function Clas() {
   const [nome, setNome] = useState("");
@@ -29,56 +33,53 @@ export default function Clas() {
   }, []);
 
   return (
-    <div className="clas-container">
-      <h1>🐉 Clãs de Inis Mara</h1>
+    <div>
+      <PageTitle>🐉 Clãs de Inis Mara</PageTitle>
 
-      <div className="form-card">
+      <FormCard>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <div className="input-wrapper">
-              <FaDragon className="input-icon" />
-              <input
-                className="input-field"
+          <FormGroup>
+            <InputWrapper>
+              <InputIcon><FaDragon /></InputIcon>
+              <InputField
                 placeholder="Nome do clã"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
               />
-            </div>
-            <div className="input-wrapper">
-              <FaMountain className="input-icon" />
-              <input
-                className="input-field"
+            </InputWrapper>
+            <InputWrapper>
+              <InputIcon><FaMountain /></InputIcon>
+              <InputField
                 placeholder="Elemento"
                 value={elemento}
                 onChange={(e) => setElemento(e.target.value)}
               />
-            </div>
-            <div className="input-wrapper">
-              <FaSearch className="input-icon" />
-              <input
-                className="input-field"
+            </InputWrapper>
+            <InputWrapper>
+              <InputIcon><FaSearch /></InputIcon>
+              <InputField
                 placeholder="Lema"
                 value={lema}
                 onChange={(e) => setLema(e.target.value)}
               />
-            </div>
-            <button type="submit" className="btn">
+            </InputWrapper>
+            <Button type="submit">
               <FaPlus /> Criar Clã
-            </button>
-          </div>
+            </Button>
+          </FormGroup>
         </form>
-      </div>
+      </FormCard>
 
       {clas.length === 0 ? (
-        <div className="empty-state">
+        <EmptyState>
           Nenhum clã foi criado ainda. Use o formulário acima para começar.
-        </div>
+        </EmptyState>
       ) : (
-        <div className="card-grid">
+        <CardGrid>
           {clas.map((cla) => (
             <ClaCard key={cla.id} {...cla} />
           ))}
-        </div>
+        </CardGrid>
       )}
     </div>
   );
